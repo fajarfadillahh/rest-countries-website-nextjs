@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 // import components
 import Header from "./Header";
+import Footer from "./Footer";
 
 export default function Layout({ children }) {
   useEffect(() => {
@@ -16,6 +17,7 @@ export default function Layout({ children }) {
       </Head>
       <Header />
       <main className="main">{children}</main>
+      <Footer />
     </>
   );
 }
