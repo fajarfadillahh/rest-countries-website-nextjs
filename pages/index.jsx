@@ -1,6 +1,7 @@
 // import components
 import CountryRegion from "@/components/Homepage/CountryRegion";
 import CountrySearch from "@/components/Homepage/CountrySearch";
+import CountryCard from "@/components/Homepage/CountryCard";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
         </div>
 
         <div className="grid gap-12 justify-self-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <div>country card</div>
+          <CountryCard />
         </div>
       </div>
     </section>
