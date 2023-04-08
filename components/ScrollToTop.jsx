@@ -20,7 +20,7 @@ export default function ScrollToTop() {
   };
 
   const handleVisible = () => {
-    if (window.scrollY > 10) {
+    if (window.scrollY > 300) {
       setVisible("bottom-12");
     } else {
       setVisible("-bottom-full");
