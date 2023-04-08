@@ -4,6 +4,7 @@ import { useEffect } from "react";
 // import components
 import Header from "./Header";
 import Footer from "./Footer";
+import ScrollToTop from "./ScrollToTop";
 
 export default function Layout({ children }) {
   useEffect(() => {
@@ -18,6 +19,7 @@ export default function Layout({ children }) {
       <Header />
       <main className="main">{children}</main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 }
