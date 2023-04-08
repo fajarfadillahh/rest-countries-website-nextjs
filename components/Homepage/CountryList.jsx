@@ -18,7 +18,7 @@ export default function CountryList({ dataCountries }) {
           {dataCountries?.map((country) => {
             return (
               <Link
-                href={`/country/${country.numericCode}`}
+                href={`/country/${country.alpha3Code.toLowerCase()}`}
                 key={country.numericCode}
               >
                 <CountryCard country={country} />
