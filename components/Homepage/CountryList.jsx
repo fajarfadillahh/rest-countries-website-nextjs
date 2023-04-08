@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 // import components
 import CountrySearch from "./CountrySearch";
 import CountryRegion from "./CountryRegion";
@@ -14,7 +16,14 @@ export default function CountryList({ dataCountries }) {
 
         <div className="grid gap-12 justify-self-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {dataCountries?.map((country) => {
-            return <CountryCard key={country.numericCode} country={country} />;
+            return (
+              <Link
+                href={`/country/${country.numericCode}`}
+                key={country.numericCode}
+              >
+                <CountryCard country={country} />
+              </Link>
+            );
           })}
         </div>
       </div>
