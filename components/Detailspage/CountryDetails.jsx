@@ -5,9 +5,9 @@ import { RiArrowLeftLine } from "react-icons/ri";
 export default function CountryDetails({ country }) {
   const [borders, setBorders] = useState([]);
 
-  // get countries border
+  // get border countries
   useEffect(() => {
-    const getCountriesBorder = async () => {
+    const getBorderCountries = async () => {
       const borderName = await Promise.all(
         country.borders.map(async (border) => {
           const res = await fetch(
@@ -21,7 +21,7 @@ export default function CountryDetails({ country }) {
       setBorders(borderName);
     };
 
-    getCountriesBorder();
+    getBorderCountries();
   }, [country]);
 
   return (
