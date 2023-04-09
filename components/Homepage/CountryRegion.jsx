@@ -12,17 +12,18 @@ const regions = [
   { name: "Oceania", value: "Oceania" },
 ];
 
-export default function CountryRegion() {
-  const [selectedRegion, setSelectedRegion] = useState("All");
+export default function CountryRegion({ onRegion }) {
+  const [region, setRegion] = useState("All");
 
   const handleSelectedRegion = (region) => {
-    setSelectedRegion(region);
+    setRegion(region);
+    onRegion(region);
   };
 
   return (
     <Menu as="div" className="relative z-10 w-max lg:justify-self-end">
       <Menu.Button className="inline-flex h-[56px] w-[210px] items-center justify-between rounded-md bg-white px-6 font-semibold text-gray-900 shadow-sm">
-        {selectedRegion === "All" ? "Filter by Region" : selectedRegion}
+        {region === "All" ? "Filter by Region" : region}
         <RiArrowDownSLine size="1.3rem" />
       </Menu.Button>
 
