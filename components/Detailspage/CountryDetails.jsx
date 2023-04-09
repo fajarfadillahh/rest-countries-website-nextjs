@@ -1,7 +1,29 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { RiArrowLeftLine } from "react-icons/ri";
 
 export default function CountryDetails({ country }) {
+  const [borders, setBorders] = useState([]);
+
+  // get countries border
+  useEffect(() => {
+    const getCountriesBorder = async () => {
+      const borderName = await Promise.all(
+        country.borders.map(async (border) => {
+          const res = await fetch(
+            `https://restcountries.com/v2/alpha/${border}`
+          );
+          const data = await res.json();
+
+          return data;
+        })
+      );
+      setBorders(borderName);
+    };
+
+    getCountriesBorder();
+  }, [country]);
+
   return (
     <section className="section pt-32">
       <div className="container grid gap-10">
@@ -81,9 +103,23 @@ export default function CountryDetails({ country }) {
               </h3>
 
               <ul className="flex flex-wrap items-center gap-4">
-                <li className="inline-flex justify-center rounded-md bg-white px-4 py-2 text-[14px] text-gray-800 shadow-sm">
-                  Countries border
-                </li>
+                {borders.length === 0 ? (
+                  <li className="inline-flex justify-center rounded-md bg-white px-4 py-2 text-[14px] text-gray-800 shadow-sm">
+                    No Border...
+                  </li>
+                ) : (
+                  borders.map((border) => {
+                    return (
+                      <Link
+                        href={`/country/${border.alpha3Code.toLowerCase()}`}
+                        key={border.alpha3Code}
+                        className="inline-flex justify-center rounded-md bg-white px-4 py-2 text-[14px] text-gray-800 shadow-sm"
+                      >
+                        {border.name}
+                      </Link>
+                    );
+                  })
+                )}
               </ul>
             </div>
           </div>
