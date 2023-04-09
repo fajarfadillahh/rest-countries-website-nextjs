@@ -20,7 +20,7 @@ export default function ScrollToTop() {
   };
 
   const handleVisible = () => {
-    if (window.scrollY > 300) {
+    if (window.scrollY >= 500) {
       setVisible("bottom-12");
     } else {
       setVisible("-bottom-full");
@@ -29,7 +29,7 @@ export default function ScrollToTop() {
 
   return (
     <div
-      className={`fixed bottom-12 right-8 inline-flex h-[36px] w-[36px] items-center justify-center rounded-md bg-white text-[1.3rem] text-gray-900 shadow-md transition-all duration-300 ${visible}`}
+      className={`fixed right-8 inline-flex h-[36px] w-[36px] items-center justify-center rounded-md bg-white text-[1.3rem] text-gray-900 shadow-md transition-all duration-300 ${visible}`}
       onClick={handleScrollToTop}
     >
       <RiArrowUpSLine />

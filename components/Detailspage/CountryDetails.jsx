@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { RiArrowLeftLine } from "react-icons/ri";
 
-export default function CountryDetails() {
+export default function CountryDetails({ country }) {
   return (
     <section className="section pt-32">
       <div className="container grid gap-10">
@@ -16,7 +16,7 @@ export default function CountryDetails() {
         <div className="grid gap-12 sm:mx-auto sm:max-w-2xl sm:justify-center lg:max-w-full lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="h-[270px] max-w-[580px] overflow-hidden rounded-md sm:h-[320px] lg:h-[430px] xl:min-w-[580px]">
             <img
-              src="/images/flag-be.svg"
+              src={`${country.flag}`}
               alt="country flag"
               className="h-full w-full object-cover object-center"
             />
@@ -24,17 +24,17 @@ export default function CountryDetails() {
 
           <div className="grid gap-6">
             <h3 className="section-title text-[26px] lg:text-[32px]">
-              Country name
+              {country.name}
             </h3>
 
             <div className="grid gap-10 sm:grid-cols-2 sm:items-start lg:gap-20">
               <ul className="grid gap-3">
                 {[
-                  ["Native Name:", `native name`],
-                  ["Population:", `1,234.555`],
-                  ["Region:", `region`],
-                  ["Sub Region:", `subregion`],
-                  ["Capital:", `capital`],
+                  ["Native Name:", `${country.nativeName}`],
+                  ["Population:", `${country.population.toLocaleString()}`],
+                  ["Region:", `${country.region}`],
+                  ["Sub Region:", `${country.subregion}`],
+                  ["Capital:", `${country.capital}`],
                 ].map(([name, value]) => {
                   return (
                     <li key={name} className="inline-flex items-start gap-1">
@@ -49,9 +49,19 @@ export default function CountryDetails() {
 
               <ul className="grid gap-3">
                 {[
-                  ["Top Level Domain:", `toleveldomain`],
-                  ["Currencies:", `currency`],
-                  ["Languages:", `language`],
+                  ["Top Level Domain:", `${country.topLevelDomain}`],
+                  [
+                    "Currencies:",
+                    `${country.currencies.map((item) => item.name)}`,
+                  ],
+                  [
+                    "Languages:",
+                    `${
+                      country.languages
+                        ? country.languages.map((item) => item.name).join(", ")
+                        : "Unknown"
+                    }`,
+                  ],
                 ].map(([name, value]) => {
                   return (
                     <li key={name} className="inline-flex items-start gap-1">
