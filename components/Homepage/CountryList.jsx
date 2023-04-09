@@ -9,6 +9,7 @@ import CountryCard from "./CountryCard";
 export default function CountryList({ dataCountries }) {
   const [filterCountries, setFilterCountries] = useState(dataCountries);
   const [selectedRegion, setSelectedRegion] = useState("All");
+  const [searchCountry, setSearchCountry] = useState("");
 
   useEffect(() => {
     // filter countries by region
@@ -17,18 +18,32 @@ export default function CountryList({ dataCountries }) {
         ? dataCountries
         : dataCountries.filter((country) => country.region === selectedRegion);
 
-    setFilterCountries(filtered);
-  }, [dataCountries, selectedRegion]);
+    // search country by name
+    const searched =
+      searchCountry === ""
+        ? filtered
+        : filtered.filter((country) =>
+            country.name.toLowerCase().includes(searchCountry)
+          );
 
+    setFilterCountries(searched);
+  }, [dataCountries, selectedRegion, searchCountry]);
+
+  // handle selected region
   const handleSelectedRegion = (region) => {
     setSelectedRegion(region);
+  };
+
+  // handle search country
+  const handleSearchCountry = (e) => {
+    setSearchCountry(e.target.value.toLowerCase());
   };
 
   return (
     <section className="section pt-32">
       <div className="container grid gap-8">
         <div className="grid gap-12 lg:grid-cols-2">
-          <CountrySearch />
+          <CountrySearch onSearch={handleSearchCountry} />
           <CountryRegion onRegion={handleSelectedRegion} />
         </div>
 
